@@ -75,4 +75,8 @@ XYZ 라이센스를 준수하며 ``LICENSE``에서 자세한 정보를 확인할
 [npm-downloads]: https://img.shields.io/npm/dm/datadog-metrics.svg?style=flat-square
 [travis-image]: https://img.shields.io/travis/dbader/node-datadog-metrics/master.svg?style=flat-square
 [travis-url]: https://travis-ci.org/dbader/node-datadog-metrics
+<<<<<<< HEAD
 [wiki]: https://github.com/yourname/yourprojec
+=======
+[wiki]: https://github.com/yourname/yourproject/wiki
+>>>>>>> 8012d6d946fd00eefa26165869dc9131da76c432
