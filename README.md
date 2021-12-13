@@ -11,7 +11,7 @@
 
 1. https://www.inflearn.com/course/따라하며-배우는-노드-리액트-기본/dashboard의 강의를 학습한 내용을 정리하였습니다.
 
-![](./header.png)
+![header](https://user-images.githubusercontent.com/22442843/145769863-b179ba01-743f-4e95-8e36-6a9cb3cf4f91.PNG)
 
 ## 사용 예제
 
