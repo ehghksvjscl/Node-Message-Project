@@ -1,28 +1,44 @@
-import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom'
-import { auth } from '../_actions/user_action'
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from 'react';
+import { auth } from '../_actions/user_actions';
+import { useSelector, useDispatch } from "react-redux";
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default function (SpecificComponent, option, adminRoute=null) {
+export default function (SpecificComponent, option, adminRoute = null) {
     function AuthenticationCheck(props) {
-        const history = useHistory()
-        const dispatch = useDispatch()
+
+        let user = useSelector(state => state.user);
+        const dispatch = useDispatch();
+
         useEffect(() => {
-            dispatch(auth())
-            .then(response => {
-                if(response.payload.isAuth) {
-                    history.push('/')
+            //To know my current status, send Auth request 
+            dispatch(auth()).then(response => {
+                //Not Loggined in Status 
+                if (!response.payload.isAuth) {
+                    if (option) {
+                        props.history.push('/login')
+                    }
+                    //Loggined in Status 
                 } else {
-                    history.push('/login')
+                    //supposed to be Admin page, but not admin person wants to go inside
+                    if (adminRoute && !response.payload.isAdmin) {
+                        props.history.push('/')
+                    }
+                    //Logged in Status, but Try to go into log in page 
+                    else {
+                        if (option === false) {
+                            props.history.push('/')
+                        }
+                    }
                 }
             })
+
         }, [])
 
         return (
-            <SpecificComponent />
+            <SpecificComponent {...props} user={user} />
         )
     }
-    
-    return AuthenticationCheck    
+    return AuthenticationCheck
 }
+
+

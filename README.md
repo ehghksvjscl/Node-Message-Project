@@ -17,14 +17,26 @@
 
 OS X & 리눅스 & 윈도우:
 
+1. make dev.js file inside config folder 
+2. put mongoDB info into dev.js file 
+3. Type  " npm install " inside the root directory  ( Download Server Dependencies ) 
+4. Type " npm install " inside the client directory ( Download Front-end Dependencies )
+
 ```sh
 npm i
+server : npm run backend
+client : npm run start
+&&
+npm run dev
 ```
 
 ## 업데이트 내역
 
 * 0.0.1
     * Boilerplate Init
+* 0.0.2
+    * Upload Page
+
 
 ## 정보
 
