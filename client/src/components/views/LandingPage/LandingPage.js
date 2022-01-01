@@ -1,7 +1,6 @@
 // eslint-disable-next-line
 import React from 'react'
 import { FaCode } from "react-icons/fa";
-import Background from '../../common/Background/Background';
 
 function LandingPage() {
     return (
