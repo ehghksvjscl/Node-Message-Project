@@ -40,8 +40,7 @@ function RegisterPage(props) {
 
     <Formik
       initialValues={{
-        email: '',
-        lastName: '',
+        user_id: '',
         name: '',
         password: '',
         confirmPassword: ''
@@ -49,11 +48,8 @@ function RegisterPage(props) {
       validationSchema={Yup.object().shape({
         name: Yup.string()
           .required('Name is required'),
-        lastName: Yup.string()
-          .required('Last Name is required'),
-        email: Yup.string()
-          .email('Email is invalid')
-          .required('Email is required'),
+        user_id: Yup.string()
+          .required('ID is required'),
         password: Yup.string()
           .min(6, 'Password must be at least 6 characters')
           .required('Password is required'),
@@ -65,10 +61,9 @@ function RegisterPage(props) {
         setTimeout(() => {
 
           let dataToSubmit = {
-            email: values.email,
+            user_id: values.user_id,
             password: values.password,
             name: values.name,
-            lastname: values.lastname,
             image: `http://gravatar.com/avatar/${moment().unix()}?d=identicon`
           };
 
@@ -118,37 +113,20 @@ function RegisterPage(props) {
                 )}
               </Form.Item>
 
-              <Form.Item required label="Last Name">
+              <Form.Item required label="ID" hasFeedback validateStatus={errors.ID && touched.ID ? "error" : 'success'}>
                 <Input
-                  id="lastName"
-                  placeholder="Enter your Last Name"
+                  id="user_id"
+                  placeholder="Enter your ID"
                   type="text"
-                  value={values.lastName}
+                  value={values.user_id}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   className={
-                    errors.lastName && touched.lastName ? 'text-input error' : 'text-input'
+                    errors.user_id && touched.user_id ? 'text-input error' : 'text-input'
                   }
                 />
-                {errors.lastName && touched.lastName && (
-                  <div className="input-feedback">{errors.lastName}</div>
-                )}
-              </Form.Item>
-
-              <Form.Item required label="Email" hasFeedback validateStatus={errors.email && touched.email ? "error" : 'success'}>
-                <Input
-                  id="email"
-                  placeholder="Enter your Email"
-                  type="email"
-                  value={values.email}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className={
-                    errors.email && touched.email ? 'text-input error' : 'text-input'
-                  }
-                />
-                {errors.email && touched.email && (
-                  <div className="input-feedback">{errors.email}</div>
+                {errors.user_id && touched.user_id && (
+                  <div className="input-feedback">{errors.user_id}</div>
                 )}
               </Form.Item>
 
