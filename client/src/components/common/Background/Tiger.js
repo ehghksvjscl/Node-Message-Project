@@ -1,11 +1,12 @@
 import React from 'react'
-import Tiger from "../../../assets/tiger.png"
+import TigerImg from "../../../assets/tiger.png"
+
 
 function Tiger() {
     return (
-        <div>
-            
-        </div>
+        <>
+            <img src={`${TigerImg}`} style={{position: "absolute", bottom:"15%", margin: "0 auto"}}/>
+        </>
     )
 }
 

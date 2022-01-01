@@ -15,6 +15,7 @@ const StyledBackGround = styled.div`
     height: 100vh;
     background-image: url(${BackgroundImg});
     background-size: cover;
+    position: relative;
 `
 
 //null   Anyone Can go inside

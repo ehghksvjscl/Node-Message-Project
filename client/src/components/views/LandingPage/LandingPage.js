@@ -1,12 +1,13 @@
 // eslint-disable-next-line
 import React from 'react'
-import { FaCode } from "react-icons/fa";
+import Tiger from '../../common/Background/Tiger';
+
 
 function LandingPage() {
     return (
         <>
             <div className="app">
-                <FaCode style={{ fontSize: '4rem' }} /><br />
+                <Tiger />
             </div>
         </>
     )
