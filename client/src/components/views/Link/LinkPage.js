@@ -1,8 +1,9 @@
-import React from 'react'
+import React,{ useEffect, useSate } from 'react'
 import Tiger from '../../common/Background/Tiger';
 import Number from '../../common/Background/Number';
 import PinkButton from '../../common/Buttons/PinkButton';
 import styled from 'styled-components';
+import Axios from 'axios';
 
 const StyledTitle = styled.div`
     font-size: 18px;
@@ -13,7 +14,13 @@ const StyledTitle = styled.div`
     text-align: center;
 `
 
-function LinkPage() {
+function LinkPage({match}) {
+    useEffect(() => {
+        Axios.get(`http://localhost:5000/api/messages/list/${match.params.id}`)
+            .then(response=> console.log("res", response.data.messages[0].user_id.name))
+    }, [])
+
+
     return (
         <div className="app">
             <Number />

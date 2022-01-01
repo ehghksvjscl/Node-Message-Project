@@ -32,7 +32,7 @@ function App() {
         <div style={{ paddingTop: '69px', minHeight: 'calc(100vh - 80px)' }}>
           <Switch>
             <Route exact path="/" component={Auth(LandingPage, null)} />
-            <Route exact path="/link" component={LinkPage} />
+            <Route path="/link/:id" component={LinkPage} />
             <Route exact path="/login" component={Auth(LoginPage, false)} />
             <Route exact path="/register" component={Auth(RegisterPage, false)} />
           </Switch>
