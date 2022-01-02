@@ -4,10 +4,9 @@ import { withRouter } from "react-router-dom";
 import { loginUser } from "../../../_actions/user_actions";
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Form, Icon, Input, Button, Checkbox, Typography } from 'antd';
+import { Form, Icon, Input, Button, Checkbox } from 'antd';
 import { useDispatch } from "react-redux";
 
-const { Title } = Typography;
 
 function LoginPage(props) {
   const dispatch = useDispatch();
@@ -79,13 +78,17 @@ function LoginPage(props) {
           handleReset,
         } = props;
         return (
-          <div className="app">
+          <div className="app" style={{height: "84vh"}}>
 
-            <Title level={2}>Log In</Title>
-            <form onSubmit={handleSubmit} style={{ width: '350px' }}>
+            <div>
+              <span style={{fontSize: "72px", fontWeight: "bold", color: "#DE4949"}}>L</span>
+              <span style={{fontSize: "72px", fontWeight: "bold", color: "#000000"}}>ogin</span>
+            </div>
+            <form onSubmit={handleSubmit} style={{ width: '18.75rem' }}>
 
-              <Form.Item required>
-                <Input
+              <Form.Item style={{ height: '3.125rem', marginBottom: '40px' }} required>
+              <label className="login_lable" for="ID">아이디</label>
+                <Input 
                   id="ID"
                   prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
                   placeholder="Enter your ID"
@@ -103,6 +106,7 @@ function LoginPage(props) {
               </Form.Item>
 
               <Form.Item required>
+              <label className="login_lable" for="password">비밀번호</label>
                 <Input
                   id="password"
                   prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -125,16 +129,9 @@ function LoginPage(props) {
               )}
 
               <Form.Item>
-                <Checkbox id="rememberMe" onChange={handleRememberMe} checked={rememberMe} >Remember me</Checkbox>
-                <a className="login-form-forgot" href="/reset_user" style={{ float: 'right' }}>
-                  forgot password
-                  </a>
-                <div>
-                  <Button type="primary" htmlType="submit" className="login-form-button" style={{ minWidth: '100%' }} disabled={isSubmitting} onSubmit={handleSubmit}>
-                    Log in
+                <Button type="primary" htmlType="submit" className="login-form-button" style={{ minWidth: '100%' }} disabled={isSubmitting} onSubmit={handleSubmit}>
+                    My 복주머니 보러가기
                 </Button>
-                </div>
-                Or <a href="/register">register now!</a>
               </Form.Item>
             </form>
           </div>

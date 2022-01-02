@@ -29,8 +29,7 @@ function App() {
   return (
     <StyledBackGround>
       <Suspense fallback={(<div>Loading...</div>)}>
-        <NavBar />
-        <div style={{ paddingTop: '69px', minHeight: 'calc(100vh - 80px)' }}>
+        <div style={{ paddingTop: '0px', minHeight: 'calc(100vh - 80px)'}}>
           <Switch>
             <Route exact path="/" component={Auth(LandingPage, null)} />
             <Route path="/link/:id" component={LinkPage} />
@@ -39,7 +38,6 @@ function App() {
             <Route exact path="/messageselect" component={MessageSelectPage} />
           </Switch>
         </div>
-        <Footer />
       </Suspense>
     </StyledBackGround>
   );
