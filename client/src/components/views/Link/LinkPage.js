@@ -4,6 +4,7 @@ import Number from '../../common/Background/Number';
 import PinkButton from '../../common/Buttons/PinkButton';
 import styled from 'styled-components';
 import Axios from 'axios';
+import {useHistory} from "react-router";
 
 const StyledTitle = styled.div`
     font-size: 18px;
@@ -31,9 +32,11 @@ function LinkPage({match}) {
     const [name, setName] = useState("")
     const [msgNum, setMsgNum] = useState(0)
 
+    const history = useHistory();
+
     const handleNextButton = (e) =>{
         e.preventDefault()
-
+        history.push("/messageselect")
     }
 
 
@@ -41,11 +44,11 @@ function LinkPage({match}) {
         <div className="app">
             <Number />
                 <StyledTitle>
-                   <p><StyledRedSpan>{name}</StyledRedSpan>님의 복주머니에 <StyledRedSpan>{msgNum}</StyledRedSpan>개의 복주머니가 있습니다. </p>
+                   <p><StyledRedSpan>{name}</StyledRedSpan>님의 복주머니에 <StyledRedSpan>{msgNum}</StyledRedSpan>개의 복주머니가 있습니다.</p>
                     <p>확인은 <StyledRedSpan>설날(2/1)</StyledRedSpan>에 가능합니다.</p>
                 </StyledTitle>
             <Tiger />
-            <PinkButton name="복을 넣어주세요"/>
+            <PinkButton name="복을 넣어주세요" onClick={handleNextButton}/>
         </div>
     )
 }

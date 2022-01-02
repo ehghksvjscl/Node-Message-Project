@@ -20,7 +20,7 @@ function MessageSelectPage() {
         <StyledTitle>
             <StyledRedSpan></StyledRedSpan>님에게 어울리는 캐릭터를 골라주세요.
         </StyledTitle> 
-        <PinkButton></PinkButton>
+        <PinkButton name="다음으로"/>
         </>
     )
 }

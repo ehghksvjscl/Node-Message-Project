@@ -11,6 +11,7 @@ import NavBar from "./views/NavBar/NavBar";
 import Footer from "./views/Footer/Footer";
 import BackgroundImg from "../assets/background.png"
 import styled from 'styled-components';
+import MessageSelectPage from './views/MessageSelectPage/MessageSelectPage';
 
 const StyledBackGround = styled.div`
     width: 100vw;
@@ -35,6 +36,7 @@ function App() {
             <Route path="/link/:id" component={LinkPage} />
             <Route exact path="/login" component={Auth(LoginPage, false)} />
             <Route exact path="/register" component={Auth(RegisterPage, false)} />
+            <Route exact path="/messageselect" component={MessageSelectPage} />
           </Switch>
         </div>
         <Footer />
