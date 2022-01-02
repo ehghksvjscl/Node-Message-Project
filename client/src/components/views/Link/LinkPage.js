@@ -31,6 +31,11 @@ function LinkPage({match}) {
     const [name, setName] = useState("")
     const [msgNum, setMsgNum] = useState(0)
 
+    const handleNextButton = (e) =>{
+        e.preventDefault()
+
+    }
+
 
     return (
         <div className="app">
@@ -40,7 +45,7 @@ function LinkPage({match}) {
                     <p>확인은 <StyledRedSpan>설날(2/1)</StyledRedSpan>에 가능합니다.</p>
                 </StyledTitle>
             <Tiger />
-            <PinkButton />
+            <PinkButton name="복을 넣어주세요"/>
         </div>
     )
 }

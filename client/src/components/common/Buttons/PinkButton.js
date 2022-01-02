@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import styled from 'styled-components';
 
 const StyledPinkButton = styled.button`
@@ -18,11 +18,16 @@ const StyledPinkButton = styled.button`
     z-index: 9;
 `
 
-function PinkButton() {
+function PinkButton(props) {
+    const [buttonTitle, setButtonTitle] = useState("")
+        useEffect(()=>{
+            setButtonTitle(props.name)
+    },[props.name])
+    
     return (
         <>
         <StyledPinkButton>
-            <p>복 넣어주기</p>
+            <p>{buttonTitle}</p>
         </StyledPinkButton>   
         </>
     )
