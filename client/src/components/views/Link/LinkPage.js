@@ -23,11 +23,14 @@ function LinkPage({match}) {
         Axios.get(`http://localhost:5000/api/messages/list/${match.params.id}`)
         .then(response=> {
             console.log(response.data)
+            setMsgNum(response.data.messages.length)
         })
+
 
     Axios.get(`http://localhost:5000/api/messages/getname/${match.params.id}`)
         .then(response=> {
             console.log(response.data)
+            setName(response.data.user)
         })
     }, [match.params.id])
 
