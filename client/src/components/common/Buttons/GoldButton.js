@@ -23,8 +23,13 @@ function GoldButton(props) {
     }, [props.name])
     return (
         <>
+<<<<<<< HEAD
             <StyledGoldButton>
                 <p style={{margin:0, padding: "1rem 1.3rem"}}>{buttonTitle}</p>
+=======
+            <StyledGoldButton type='submit'>
+                <p>시작하기</p>
+>>>>>>> b4980a493eb30e188caa78553e4397bfa9622533
             </StyledGoldButton>
         </>
     )

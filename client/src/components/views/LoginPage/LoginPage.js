@@ -4,35 +4,29 @@ import { withRouter } from "react-router-dom";
 import { loginUser } from "../../../_actions/user_actions";
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Form, Icon, Input } from 'antd';
 import { useDispatch } from "react-redux";
+import GoldButton from "../../common/Buttons/GoldButton";
+import Home from "../../common/Home/Home";
 
 
 function LoginPage(props) {
   const dispatch = useDispatch();
-  const rememberMeChecked = localStorage.getItem("rememberMe") ? true : false;
 
   const [formErrorMessage, setFormErrorMessage] = useState('')
-  const [rememberMe, setRememberMe] = useState(rememberMeChecked)
-
-  const handleRememberMe = () => {
-    setRememberMe(!rememberMe)
-  };
-
-  const initialID = localStorage.getItem("rememberMe") ? localStorage.getItem("rememberMe") : '';
 
   return (
     <Formik
       initialValues={{
-        ID: initialID,
+        ID: '',
         password: '',
       }}
       validationSchema={Yup.object().shape({
         ID: Yup.string()
-          .required('ID is required'),
+          .required('아이디를 입력 하세요.'),
         password: Yup.string()
-          .min(6, 'Password must be at least 6 characters')
-          .required('Password is required'),
+          .min(8, '최소 8글자 이상입니다.')
+          .required('페스워드를 입력하세요'),
       })}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
@@ -45,14 +39,10 @@ function LoginPage(props) {
             .then(response => {
               if (response.payload.loginSuccess) {
                 window.localStorage.setItem('userId', response.payload.userId);
-                if (rememberMe === true) {
-                  window.localStorage.setItem('rememberMe', values.id);
-                } else {
-                  localStorage.removeItem('rememberMe');
-                }
                 props.history.push("/");
               } else {
-                setFormErrorMessage('Check out your Account or Password again')
+                alert("아이디 비밀번호를 확인 하세요")
+                values = ""
               }
             })
             .catch(err => {
@@ -70,23 +60,20 @@ function LoginPage(props) {
           values,
           touched,
           errors,
-          dirty,
-          isSubmitting,
           handleChange,
           handleBlur,
           handleSubmit,
-          handleReset,
         } = props;
         return (
           <div className="app" style={{height: "84vh"}}>
-
+            <Home/>
             <div>
               <span style={{fontSize: "72px", fontWeight: "bold", color: "#DE4949"}}>L</span>
               <span style={{fontSize: "72px", fontWeight: "bold", color: "#000000"}}>ogin</span>
             </div>
             <form onSubmit={handleSubmit} style={{ width: '18.75rem' }}>
 
-              <Form.Item style={{ height: '3.125rem', marginBottom: '40px' }} required>
+              <Form.Item style={{ height: '65px', marginBottom: '40px' }} required>
               <label className="login_lable" for="ID">아이디</label>
                 <Input 
                   id="ID"
@@ -95,7 +82,6 @@ function LoginPage(props) {
                   type="text"
                   value={values.ID}
                   onChange={handleChange}
-                  onBlur={handleBlur}
                   className={
                     errors.ID && touched.ID ? 'text-input error' : 'text-input'
                   }
@@ -104,8 +90,7 @@ function LoginPage(props) {
                   <div className="input-feedback">{errors.ID}</div>
                 )}
               </Form.Item>
-
-              <Form.Item required>
+              <Form.Item required >
               <label className="login_lable" for="password">비밀번호</label>
                 <Input
                   id="password"
@@ -114,7 +99,6 @@ function LoginPage(props) {
                   type="password"
                   value={values.password}
                   onChange={handleChange}
-                  onBlur={handleBlur}
                   className={
                     errors.password && touched.password ? 'text-input error' : 'text-input'
                   }
@@ -128,10 +112,11 @@ function LoginPage(props) {
                 <label ><p style={{ color: '#ff0000bf', fontSize: '0.7rem', border: '1px solid', padding: '1rem', borderRadius: '10px' }}>{formErrorMessage}</p></label>
               )}
 
-              <Form.Item>
-                <Button type="primary" htmlType="submit" className="login-form-button" style={{ minWidth: '100%' }} disabled={isSubmitting} onSubmit={handleSubmit}>
+              <Form.Item  style={{ marginTop: "5rem", marginLeft: "2rem"}}>
+                <GoldButton onClick={() => console.log("push my page")}/>
+                {/* <Button type="primary" htmlType="submit" className="login-form-GoldButton" style={{ minWidth: '100%' }} disabled={isSubmitting} onSubmit={handleSubmit}>
                     My 복주머니 보러가기
-                </Button>
+                </Button> */}
               </Form.Item>
             </form>
           </div>
