@@ -20,7 +20,7 @@ function LandingPage() {
                 <Number />
                 <StyledTitle>새해 복 많이 주세요.</StyledTitle>
                 <Tiger />
-                <GoldButton />
+                <GoldButton name="시작하기"/>
             </div>
         </>
     )
