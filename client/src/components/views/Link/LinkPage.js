@@ -21,12 +21,11 @@ const StyledRedSpan = styled.span`
 function LinkPage({match}) {
     useEffect(() => {
         Axios.get(`http://localhost:5000/api/messages/list/${match.params.id}`)
-            .then(response=> {
-                return
-                console.log("res", response.data.messages[0].user_id.name)
-                setName(response.data.messages[0].user_id.name)
-                setMsgNum(response.data.messages.length)
-            })
+            .then(response=>
+                    console.log("res", response) 
+                     //setName(response.data.messages[0].user_id.name)
+                )
+            .catch(err => console.log("error", err))
     }, [match.params.id])
 
     const [name, setName] = useState("")
@@ -36,7 +35,11 @@ function LinkPage({match}) {
 
     const handleNextButton = (e) =>{
         e.preventDefault()
-        history.push("/messageselect")
+        // console.log("match", match.params.id);
+        history.push({
+            pathname: "/messageselect",
+            state: name
+        })
     }
 
 
@@ -48,7 +51,9 @@ function LinkPage({match}) {
                     <p>확인은 <StyledRedSpan>설날(2/1)</StyledRedSpan>에 가능합니다.</p>
                 </StyledTitle>
             <Tiger />
-            <PinkButton name="복을 넣어주세요" onClick={handleNextButton}/>
+            <div onClick={handleNextButton} match={match.params.id}>
+                <PinkButton name="복을 넣어주세요"/>
+            </div>
         </div>
     )
 }

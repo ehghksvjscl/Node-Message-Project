@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import PinkButton from '../../common/Buttons/PinkButton';
 import styled from 'styled-components';
+import {useHistory,useLocation} from 'react-router-dom'
 
 const StyledTitle = styled.div`
     font-size: 18px;
@@ -15,13 +16,20 @@ const StyledRedSpan = styled.span`
 `
 
 function MessageSelectPage() {
+    
+    const location = useLocation();
+
+    console.log("location", location.state);
+
+    const [name, setName] = useState("")
+
     return (
-        <>
+        <div className="app">
         <StyledTitle>
-            <StyledRedSpan></StyledRedSpan>님에게 어울리는 캐릭터를 골라주세요.
+            <StyledRedSpan>{name}</StyledRedSpan>님에게 어울리는 캐릭터를 골라주세요.
         </StyledTitle> 
         <PinkButton name="다음으로"/>
-        </>
+        </div>
     )
 }
 

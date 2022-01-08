@@ -26,7 +26,7 @@ function PinkButton(props) {
     
     return (
         <>
-        <StyledPinkButton>
+        <StyledPinkButton type='submit'>
             <p>{buttonTitle}</p>
         </StyledPinkButton>   
         </>

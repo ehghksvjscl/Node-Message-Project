@@ -8,6 +8,7 @@ const { Message } = require("../models/Message");
 //=================================
 
 router.get("/list/:user_id", (req, res) => {
+    console.log(req.params.user_id);
     Message.find({"user_id":req.params.user_id})
     .populate({
         path: 'user_id',

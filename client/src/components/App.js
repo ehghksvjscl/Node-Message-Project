@@ -35,7 +35,7 @@ function App() {
             <Route path="/link/:id" component={LinkPage} />
             <Route exact path="/login" component={Auth(LoginPage, false)} />
             <Route exact path="/register" component={Auth(RegisterPage, false)} />
-            <Route exact path="/messageselect" component={MessageSelectPage} />
+            <Route path="/messageselect" component={MessageSelectPage} />
           </Switch>
         </div>
       </Suspense>
