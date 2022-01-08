@@ -21,7 +21,7 @@ const StyledGoldButton = styled.button`
 function GoldButton() {
     return (
         <>
-            <StyledGoldButton>
+            <StyledGoldButton type='submit'>
                 <p>시작하기</p>
             </StyledGoldButton>
         </>

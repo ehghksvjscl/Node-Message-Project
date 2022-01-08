@@ -22,10 +22,12 @@ function LinkPage({match}) {
     useEffect(() => {
         Axios.get(`http://localhost:5000/api/messages/list/${match.params.id}`)
             .then(response=> {
-                return
-                console.log("res", response.data.messages[0].user_id.name)
-                setName(response.data.messages[0].user_id.name)
-                setMsgNum(response.data.messages.length)
+                console.log(response.data)
+            })
+
+        Axios.get(`http://localhost:5000/api/messages/getname/${match.params.id}`)
+            .then(response=> {
+                console.log(response.data)
             })
     }, [match.params.id])
 

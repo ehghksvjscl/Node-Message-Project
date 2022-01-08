@@ -39,10 +39,11 @@ input.error {
 .input-feedback {
   color: red;
   height: 5px;
-  margin-top: -12px;
+  margin-top: -8px;
 }
 
 #ID, #password {
+  height: 35px;
   border: 3px solid #DAB967;
   border-radius: 50px;
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.10) 0px 6px 6px;
