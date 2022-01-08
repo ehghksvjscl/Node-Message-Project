@@ -18,11 +18,14 @@ const StyledRedSpan = styled.span`
 function MessageSelectPage() {
     
     const location = useLocation();
-
     console.log("location", location.state);
 
-    const [name, setName] = useState("")
+    useEffect(()=>{
+        setName(location.state)
+    }, [location.state])
 
+    const [name, setName] = useState("")
+    
     return (
         <div className="app">
         <StyledTitle>
