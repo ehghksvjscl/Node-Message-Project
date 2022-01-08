@@ -21,11 +21,14 @@ const StyledRedSpan = styled.span`
 function LinkPage({match}) {
     useEffect(() => {
         Axios.get(`http://localhost:5000/api/messages/list/${match.params.id}`)
-            .then(response=>
-                    console.log("res", response) 
-                     //setName(response.data.messages[0].user_id.name)
-                )
-            .catch(err => console.log("error", err))
+        .then(response=> {
+            console.log(response.data)
+        })
+
+    Axios.get(`http://localhost:5000/api/messages/getname/${match.params.id}`)
+        .then(response=> {
+            console.log(response.data)
+        })
     }, [match.params.id])
 
     const [name, setName] = useState("")
