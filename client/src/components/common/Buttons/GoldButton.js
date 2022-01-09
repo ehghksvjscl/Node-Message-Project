@@ -12,7 +12,8 @@ const StyledGoldButton = styled.button`
     line-height: 100%;
     position: absolute;
     bottom: 5%;
-    margin: 0 auto;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 9;
 `
 

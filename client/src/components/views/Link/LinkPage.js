@@ -57,9 +57,9 @@ function LinkPage({match}) {
                     <p>확인은 <StyledRedSpan>설날(2/1)</StyledRedSpan>에 가능합니다.</p>
                 </StyledTitle>
             <Tiger />
-            <div onClick={handleNextButton} match={match.params.id}>
+            <footer onClick={handleNextButton} match={match.params.id} style={{width: "100%"}}>
                 <PinkButton name="복을 넣어주세요"/>
-            </div>
+            </footer>
         </div>
     )
 }
