@@ -47,7 +47,7 @@ input.error {
   margin-top: -8px;
 }
 
-#ID, #password, #confirmPassword, #name{
+#user_id, #password, #confirmPassword, #name{
   height: 35px;
   border: 3px solid #DAB967;
   border-radius: 50px;

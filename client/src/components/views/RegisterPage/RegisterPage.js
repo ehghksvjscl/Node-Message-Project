@@ -25,7 +25,7 @@ function RegisterPage(props) {
       validationSchema={Yup.object().shape({
         name: Yup.string()
           .required('이름을 입력하세요.'),
-        ID: Yup.string()
+        user_id: Yup.string()
           .required('아이디를 입력하세요.'),
         password: Yup.string()
           .min(8, '페스워드는 8자리 이상입니다.')
@@ -92,12 +92,12 @@ function RegisterPage(props) {
               </Form.Item>
 
               <Form.Item required style={{height: "67px"}}>
-                <label className="login_lable" for="ID">아이디</label>
+                <label className="login_lable" for="user_id">아이디</label>
                 <Input
-                  id="ID"
+                  id="user_id"
                   placeholder="아이디를 입력하세요"
                   type="text"
-                  value={values.ID}
+                  value={values.user_id}
                   onChange={handleChange}
                   className={
                     errors.user_id && touched.user_id ? 'text-input error' : 'text-input'

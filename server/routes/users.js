@@ -23,7 +23,6 @@ router.get("/auth", auth, (req, res) => {
 router.post("/register", (req, res) => {
 
     const user = new User(req.body);
-    console.log(user);
     user.save((err, doc) => {
         if (err) return res.json({ success: false, err });
         return res.status(200).json({
@@ -34,7 +33,6 @@ router.post("/register", (req, res) => {
 
 router.post("/login", (req, res) => {
     User.findOne({ user_id: req.body.ID }, (err, user) => {
-        console.log(user);
         if (!user)
             return res.json({
                 loginSuccess: false,

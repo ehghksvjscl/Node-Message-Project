@@ -73,20 +73,20 @@ function LoginPage(props) {
             <form onSubmit={handleSubmit} style={{ width: '18.75rem' }}>
 
               <Form.Item style={{ height: '65px', marginBottom: '40px' }} required>
-              <label className="login_lable" for="ID">아이디</label>
+              <label className="login_lable" for="user_id">아이디</label>
                 <Input 
-                  id="ID"
+                  id="user_id"
                   prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
                   placeholder="Enter your ID"
                   type="text"
-                  value={values.ID}
+                  value={values.user_id}
                   onChange={handleChange}
                   className={
-                    errors.ID && touched.ID ? 'text-input error' : 'text-input'
+                    errors.user_id && touched.user_id ? 'text-input error' : 'text-input'
                   }
                 />
-                {errors.ID && touched.ID && (
-                  <div className="input-feedback">{errors.ID}</div>
+                {errors.user_id && touched.user_id && (
+                  <div className="input-feedback">{errors.user_id}</div>
                 )}
               </Form.Item>
               <Form.Item required >
