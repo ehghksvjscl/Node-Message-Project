@@ -1,39 +1,15 @@
 // eslint-disable-next-line
 import React from "react";
-import moment from "moment";
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { registerUser } from "../../../_actions/user_actions";
 import { useDispatch } from "react-redux";
-
+import GoldButton from "../../common/Buttons/GoldButton";
 import {
   Form,
   Input,
-  Button,
 } from 'antd';
-
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 8 },
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 16 },
-  },
-};
-const tailFormItemLayout = {
-  wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 0,
-    },
-    sm: {
-      span: 16,
-      offset: 8,
-    },
-  },
-};
+import Home from "../../common/Home/Home";
 
 function RegisterPage(props) {
   const dispatch = useDispatch();
@@ -48,15 +24,15 @@ function RegisterPage(props) {
       }}
       validationSchema={Yup.object().shape({
         name: Yup.string()
-          .required('Name is required'),
+          .required('이름을 입력하세요.'),
         user_id: Yup.string()
-          .required('ID is required'),
+          .required('아이디를 입력하세요.'),
         password: Yup.string()
-          .min(6, 'Password must be at least 6 characters')
-          .required('Password is required'),
+          .min(8, '페스워드는 8자리 이상입니다.')
+          .required('비밀번호를 입력하세요.'),
         confirmPassword: Yup.string()
-          .oneOf([Yup.ref('password'), null], 'Passwords must match')
-          .required('Confirm Password is required')
+          .oneOf([Yup.ref('password'), null], '비밀번호가 일치하지 않습니다.')
+          .required('확인 비밀번호를 입력하세요.')
       })}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
@@ -65,7 +41,6 @@ function RegisterPage(props) {
             user_id: values.user_id,
             password: values.password,
             name: values.name,
-            image: `http://gravatar.com/avatar/${moment().unix()}?d=identicon`
           };
 
           dispatch(registerUser(dataToSubmit)).then(response => {
@@ -85,19 +60,22 @@ function RegisterPage(props) {
           values,
           touched,
           errors,
-          dirty,
           isSubmitting,
           handleChange,
           handleBlur,
           handleSubmit,
-          handleReset,
         } = props;
         return (
           <div className="app">
-            <h2>Sign up</h2>
-            <Form style={{ minWidth: '375px' }} {...formItemLayout} onSubmit={handleSubmit} >
+            <Home />
+            <div>
+              <span style={{fontSize: "72px", fontWeight: "bold", color: "#DE4949"}}>S</span>
+              <span style={{fontSize: "72px", fontWeight: "bold", color: "#000000"}}>ign up</span>
+            </div>
+            <form onSubmit={handleSubmit} style={{ width: '18.75rem' }}>
 
-              <Form.Item required label="Name">
+              <Form.Item required>
+              <label className="name_lable" for="name">이름</label>
                 <Input
                   id="name"
                   placeholder="Enter your name"
@@ -114,14 +92,14 @@ function RegisterPage(props) {
                 )}
               </Form.Item>
 
-              <Form.Item required label="ID" hasFeedback validateStatus={errors.ID && touched.ID ? "error" : 'success'}>
+              <Form.Item required >
+                <label className="login_lable" for="ID">아이디</label>
                 <Input
-                  id="user_id"
-                  placeholder="Enter your ID"
+                  id="ID"
+                  placeholder="아이디를 입력하세요"
                   type="text"
-                  value={values.user_id}
+                  value={values.ID}
                   onChange={handleChange}
-                  onBlur={handleBlur}
                   className={
                     errors.user_id && touched.user_id ? 'text-input error' : 'text-input'
                   }
@@ -131,14 +109,14 @@ function RegisterPage(props) {
                 )}
               </Form.Item>
 
-              <Form.Item required label="Password" hasFeedback validateStatus={errors.password && touched.password ? "error" : 'success'}>
+              <Form.Item required>
+                <label className="password_lable" for="password">비밀번호</label>
                 <Input
                   id="password"
                   placeholder="Enter your password"
                   type="password"
                   value={values.password}
                   onChange={handleChange}
-                  onBlur={handleBlur}
                   className={
                     errors.password && touched.password ? 'text-input error' : 'text-input'
                   }
@@ -148,14 +126,14 @@ function RegisterPage(props) {
                 )}
               </Form.Item>
 
-              <Form.Item required label="Confirm" hasFeedback>
+              <Form.Item required>
+                <label className="password_lable" for="password">비밀번호 확인</label>
                 <Input
                   id="confirmPassword"
                   placeholder="Enter your confirmPassword"
                   type="password"
                   value={values.confirmPassword}
                   onChange={handleChange}
-                  onBlur={handleBlur}
                   className={
                     errors.confirmPassword && touched.confirmPassword ? 'text-input error' : 'text-input'
                   }
@@ -165,12 +143,13 @@ function RegisterPage(props) {
                 )}
               </Form.Item>
 
-              <Form.Item {...tailFormItemLayout}>
-                <Button onClick={handleSubmit} type="primary" disabled={isSubmitting}>
-                  Submit
-                </Button>
+              <Form.Item  style={{ marginTop: "5rem", marginLeft: "2rem"}}>
+                <GoldButton onClick={() => console.log("push my page")}/>
+                {/* <Button type="primary" htmlType="submit" className="login-form-GoldButton" style={{ minWidth: '100%' }} disabled={isSubmitting} onSubmit={handleSubmit}>
+                    My 복주머니 보러가기
+                </Button> */}
               </Form.Item>
-            </Form>
+            </form>
           </div>
         );
       }}

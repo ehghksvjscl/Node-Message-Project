@@ -11,6 +11,7 @@ router.get("/getname/:user_id", (req, res) => {
     User.findOne({"_id":req.params.user_id})
     .exec((err, user) => {
         if(err) return res.status(400).send(err)
+        if(!user) return res.status(400).send("잘못된 아이디 입니다.")
         return res.status(200).json({success: true, user: user.name}, )
     })
 });
