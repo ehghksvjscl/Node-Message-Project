@@ -12,6 +12,7 @@ import Footer from "./views/Footer/Footer";
 import BackgroundImg from "../assets/background.png"
 import styled from 'styled-components';
 import MessageSelectPage from './views/MessageSelectPage/MessageSelectPage';
+import MessageInputPage from './views/MessageInputPage/MessageInputPage';
 
 const StyledBackGround = styled.div`
     width: 100vw;
@@ -36,7 +37,8 @@ function App() {
             <Route exact path="/login" component={Auth(LoginPage, false)} />
             <Route exact path="/register" component={Auth(RegisterPage, false)} />
             <Route path="/messageselect" component={MessageSelectPage} />
-          </Switch>
+            <Route path="/messageinput" component={MessageInputPage} />
+           </Switch>
         </div>
       </Suspense>
     </StyledBackGround>
