@@ -42,14 +42,15 @@ input.error {
   margin-top: -8px;
 }
 
-#ID, #password {
+#ID, #password, #confirmPassword, #name{
   height: 35px;
   border: 3px solid #DAB967;
   border-radius: 50px;
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.10) 0px 6px 6px;
 }
 
-.login_lable {
+.login_lable, .password_lable,
+.name_lable {
   font-size:24px;
   font-weight: bold;
 }
