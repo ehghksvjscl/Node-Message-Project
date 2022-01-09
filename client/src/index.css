@@ -35,6 +35,11 @@ input.error {
   border-color: red;
 }
 
+.register-input-feedback {
+  color: red;
+  font-size: 10px;
+  margin-top: -8px;
+}
 
 .input-feedback {
   color: red;

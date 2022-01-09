@@ -25,7 +25,7 @@ function RegisterPage(props) {
       validationSchema={Yup.object().shape({
         name: Yup.string()
           .required('이름을 입력하세요.'),
-        user_id: Yup.string()
+        ID: Yup.string()
           .required('아이디를 입력하세요.'),
         password: Yup.string()
           .min(8, '페스워드는 8자리 이상입니다.')
@@ -66,15 +66,14 @@ function RegisterPage(props) {
           handleSubmit,
         } = props;
         return (
-          <div className="app">
+          <div className="app" style={{height: "110vh"}}>
             <Home />
             <div>
               <span style={{fontSize: "72px", fontWeight: "bold", color: "#DE4949"}}>S</span>
               <span style={{fontSize: "72px", fontWeight: "bold", color: "#000000"}}>ign up</span>
             </div>
             <form onSubmit={handleSubmit} style={{ width: '18.75rem' }}>
-
-              <Form.Item required>
+              <Form.Item required style={{height: "67px"}}>
               <label className="name_lable" for="name">이름</label>
                 <Input
                   id="name"
@@ -88,11 +87,11 @@ function RegisterPage(props) {
                   }
                 />
                 {errors.name && touched.name && (
-                  <div className="input-feedback">{errors.name}</div>
+                  <div className="register-input-feedback">{errors.name}</div>
                 )}
               </Form.Item>
 
-              <Form.Item required >
+              <Form.Item required style={{height: "67px"}}>
                 <label className="login_lable" for="ID">아이디</label>
                 <Input
                   id="ID"
@@ -105,11 +104,11 @@ function RegisterPage(props) {
                   }
                 />
                 {errors.user_id && touched.user_id && (
-                  <div className="input-feedback">{errors.user_id}</div>
+                  <div className="register-input-feedback">{errors.user_id}</div>
                 )}
               </Form.Item>
 
-              <Form.Item required>
+              <Form.Item required style={{height: "67px"}}>
                 <label className="password_lable" for="password">비밀번호</label>
                 <Input
                   id="password"
@@ -122,11 +121,11 @@ function RegisterPage(props) {
                   }
                 />
                 {errors.password && touched.password && (
-                  <div className="input-feedback">{errors.password}</div>
+                  <div className="register-input-feedback">{errors.password}</div>
                 )}
               </Form.Item>
 
-              <Form.Item required>
+              <Form.Item required style={{height: "67px"}}>
                 <label className="password_lable" for="password">비밀번호 확인</label>
                 <Input
                   id="confirmPassword"
@@ -139,12 +138,12 @@ function RegisterPage(props) {
                   }
                 />
                 {errors.confirmPassword && touched.confirmPassword && (
-                  <div className="input-feedback">{errors.confirmPassword}</div>
+                  <div className="register-input-feedback">{errors.confirmPassword}</div>
                 )}
               </Form.Item>
 
               <Form.Item  style={{ marginTop: "5rem", marginLeft: "2rem"}}>
-                <GoldButton onClick={() => console.log("push my page")}/>
+                <GoldButton name="시작하기" onClick={() => console.log("push my page")}/>
                 {/* <Button type="primary" htmlType="submit" className="login-form-GoldButton" style={{ minWidth: '100%' }} disabled={isSubmitting} onSubmit={handleSubmit}>
                     My 복주머니 보러가기
                 </Button> */}

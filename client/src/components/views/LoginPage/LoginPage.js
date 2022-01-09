@@ -112,7 +112,7 @@ function LoginPage(props) {
               )}
 
               <Form.Item  style={{ marginTop: "5rem", marginLeft: "2rem"}}>
-                <GoldButton onClick={() => console.log("push my page")}/>
+                <GoldButton name="My 복주머니 보러가기" onClick={() => console.log("push my page")}/>
                 {/* <Button type="primary" htmlType="submit" className="login-form-GoldButton" style={{ minWidth: '100%' }} disabled={isSubmitting} onSubmit={handleSubmit}>
                     My 복주머니 보러가기
                 </Button> */}
