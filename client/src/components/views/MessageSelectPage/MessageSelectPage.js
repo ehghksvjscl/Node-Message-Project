@@ -47,7 +47,7 @@ function MessageSelectPage() {
             <StyledRedSpan>{name}</StyledRedSpan>님에게 어울리는 캐릭터를 골라주세요.
         </StyledTitle> 
         <StyledIconContainer>
-           
+            
         </StyledIconContainer>
         <PinkButton name="다음으로"/>
         </div>
