@@ -2,12 +2,12 @@ import React, {useState, useEffect} from 'react';
 import PinkButton from '../../common/Buttons/PinkButton';
 import styled from 'styled-components';
 import {useHistory,useLocation} from 'react-router-dom'
-import PuppyIcon from '../../common/messageIcon/PuppyIcon';
-import CatIcon from '../../common/messageIcon/CatIcon';
-import HamsterIcon from '../../common/messageIcon/HamsterIcon';
-import KoalaIcon from '../../common/messageIcon/KoalaIcon';
-import MouseIcon from '../../common/messageIcon/MouseIcon';
-import PandaIcon from '../../common/messageIcon/PandaIcon';
+// import PuppyIcon from '../../common/messageIcon/PuppyIcon';
+// import CatIcon from '../../common/messageIcon/CatIcon';
+// import HamsterIcon from '../../common/messageIcon/HamsterIcon';
+// import KoalaIcon from '../../common/messageIcon/KoalaIcon';
+// import MouseIcon from '../../common/messageIcon/MouseIcon';
+// import PandaIcon from '../../common/messageIcon/PandaIcon';
 
 const StyledTitle = styled.div`
     font-size: 18px;
@@ -47,12 +47,7 @@ function MessageSelectPage() {
             <StyledRedSpan>{name}</StyledRedSpan>님에게 어울리는 캐릭터를 골라주세요.
         </StyledTitle> 
         <StyledIconContainer>
-            <CatIcon />
-            <PuppyIcon />
-            <HamsterIcon />
-            <KoalaIcon />
-            <MouseIcon />
-            <PandaIcon />
+           
         </StyledIconContainer>
         <PinkButton name="다음으로"/>
         </div>
