@@ -142,7 +142,7 @@ function RegisterPage(props) {
                 )}
               </Form.Item>
 
-              <Form.Item  style={{ marginTop: "5rem", marginLeft: "2rem"}}>
+              <Form.Item  style={{ marginTop: "5rem", textAlign: "center"}}>
                 <GoldButton name="시작하기" onClick={() => console.log("push my page")}/>
                 {/* <Button type="primary" htmlType="submit" className="login-form-GoldButton" style={{ minWidth: '100%' }} disabled={isSubmitting} onSubmit={handleSubmit}>
                     My 복주머니 보러가기
