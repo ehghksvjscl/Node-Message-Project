@@ -53,6 +53,11 @@ const StyledIcon = styled.img`
     left: 35%;
 `
 
+const StyledSenderInput = styled.input`
+    width: 70%;
+    border: none;
+`
+
 function MessageInputPage() {
     const location = useLocation();
     const [ recepient, setRecepient ] = useState("")
@@ -73,15 +78,28 @@ function MessageInputPage() {
         setIcon(pickedIcon.path)
     }, [])
 
+    const handleOnchangeSender=(e)=>{
+        setSender(e.target.value)
+    }
+
+    const handleNextButton=()=>{
+        // console.log("sender", sender)
+        history.push({
+            pathname: "/completed",
+        })
+    }
+
     return (
         <div className='app'>
             <StyledMessageInput>
                 <StyledTo>To.{recepient}</StyledTo>
                 <StyledIcon src={icon} />
                 <StyledTextArea placeholder='메세지를 입력해주세요...'/>
-                <StyledFrom>From.{sender}</StyledFrom>
+                <StyledFrom>From.<StyledSenderInput name="senderName" onChange={handleOnchangeSender} value={sender} placeholder="이름을 입력해주세요"/></StyledFrom>
             </StyledMessageInput>
+            <footer onClick={handleNextButton} style={{width: "100%"}}>
             <PinkButton name="다음으로"/>
+            </footer>
         </div>
     )
 }
