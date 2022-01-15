@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import PinkButton from '../../common/Buttons/PinkButton';
 import MessageInput from '..//../../assets/messageInput.png';
 import {useHistory,useLocation} from 'react-router-dom'
+import ani01 from '../../../assets/icons/ani01.png'
+import ani02 from '../../../assets/icons/ani02.png'
+import ani03 from '../../../assets/icons/ani03.png'
+import ani04 from '../../../assets/icons/ani04.png'
+import ani05 from '../../../assets/icons/ani05.png'
+import ani06 from '../../../assets/icons/ani06.png'
 
 
 
@@ -41,15 +47,39 @@ const StyledTextArea = styled.textarea`
     font-size: 24px;
 `
 
+const StyledIcon = styled.img`
+    position: absolute;
+    top:-8%;
+    left: 35%;
+`
+
 function MessageInputPage() {
     const location = useLocation();
+    const [ recepient, setRecepient ] = useState("")
+    const [ sender, setSender ] = useState("")
+    const [icon, setIcon] = useState(1)
+    const animals = [
+        {num: 1, path : ani01},
+        {num: 2, path : ani02},
+        {num: 3, path : ani03},
+        {num: 4, path : ani04},
+        {num: 5, path : ani05},
+        {num: 6, path : ani06},
+        ]
+    useEffect(()=>{
+        setRecepient(window.localStorage.getItem("userName"))
+        console.log(location.state.id);
+        const pickedIcon = animals.find(icon => icon.num === location.state.id)
+        setIcon(pickedIcon.path)
+    }, [])
 
     return (
         <div className='app'>
             <StyledMessageInput>
-                <StyledTo>To.</StyledTo>
+                <StyledTo>To.{recepient}</StyledTo>
+                <StyledIcon src={icon} />
                 <StyledTextArea placeholder='메세지를 입력해주세요...'/>
-                <StyledFrom>From.</StyledFrom>
+                <StyledFrom>From.{sender}</StyledFrom>
             </StyledMessageInput>
             <PinkButton name="다음으로"/>
         </div>

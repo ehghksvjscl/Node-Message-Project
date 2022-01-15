@@ -42,7 +42,6 @@ function LinkPage({match}) {
 
     const handleNextButton = (e) =>{
         e.preventDefault()
-        // console.log("match", match.params.id);
         history.push({
             pathname: "/messageselect",
             name: name
