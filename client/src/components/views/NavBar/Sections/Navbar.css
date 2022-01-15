@@ -2,8 +2,9 @@
 
 .menu {
   font-family: "Gaegu", "Noto Sans KR";
+  top: 5px;
   padding: 0 20px;
-  overflow: auto;
+  overflow: hidden;
 }
 
 .menu__logo {

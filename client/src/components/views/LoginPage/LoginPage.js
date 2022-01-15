@@ -8,7 +8,7 @@ import { Form, Icon, Input } from 'antd';
 import { useDispatch } from "react-redux";
 import GoldButton from "../../common/Buttons/GoldButton";
 import Home from "../../common/Home/Home";
-
+import { ToastContainer, toast } from 'react-toastify';
 
 function LoginPage(props) {
   const dispatch = useDispatch();
@@ -34,7 +34,6 @@ function LoginPage(props) {
             user_id: values.user_id,
             password: values.password
           };
-          console.log(dataToSubmit);
           dispatch(loginUser(dataToSubmit))
             .then(response => {
               if (response.payload.loginSuccess) {
@@ -42,6 +41,28 @@ function LoginPage(props) {
                 props.history.push("/");
               } else {
                 alert("아이디 비밀번호를 확인 하세요")
+                toast("Default Notification !");
+
+                toast.success("Success Notification !", {
+                  position: toast.POSITION.TOP_CENTER
+                });
+          
+                toast.error("Error Notification !", {
+                  position: toast.POSITION.TOP_LEFT
+                });
+          
+                toast.warn("Warning Notification !", {
+                  position: toast.POSITION.BOTTOM_LEFT
+                });
+          
+                toast.info("Info Notification !", {
+                  position: toast.POSITION.BOTTOM_CENTER
+                });
+          
+                toast("Custom Style Notification with css class!", {
+                  position: toast.POSITION.BOTTOM_RIGHT,
+                  className: 'foo-bar'
+                });
               }
             })
             .catch(err => {

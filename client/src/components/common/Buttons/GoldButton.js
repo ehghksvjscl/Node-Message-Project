@@ -23,7 +23,7 @@ function GoldButton(props) {
     }, [props.name])
     return (
         <>
-            <StyledGoldButton type='submit'>
+            <StyledGoldButton type='submit' onClick={props.onClick}>
                 <p style={{margin:0, padding: "1rem 1.3rem"}}>{buttonTitle}</p>
             </StyledGoldButton>
         </>
