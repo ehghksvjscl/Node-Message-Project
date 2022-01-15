@@ -60,6 +60,7 @@ const StyledSenderInput = styled.input`
 
 function MessageInputPage() {
     const location = useLocation();
+    const history = useHistory()
     const [ recepient, setRecepient ] = useState("")
     const [ sender, setSender ] = useState("")
     const [icon, setIcon] = useState(1)
