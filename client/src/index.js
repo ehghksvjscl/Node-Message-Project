@@ -8,7 +8,8 @@ import './index.css';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from "react-router-dom";
-
+import { transitions, positions, Provider as AlertProvider } from 'react-alert'
+import AlertTemplate from 'react-alert-template-basic'
 import Reducer from './_reducers';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -19,6 +20,13 @@ import ReduxThunk from 'redux-thunk';
 
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk)(createStore);
 
+const options = {
+    position: positions.TOP_CENTER,
+    timeout: 3000,
+    offset: '40px',
+    transition: transitions.SCALE
+  }
+
 ReactDOM.render(
     <Provider
         store={createStoreWithMiddleware(
@@ -28,7 +36,9 @@ ReactDOM.render(
         )}
     >
         <BrowserRouter>
-            <App />
+            <AlertProvider template={AlertTemplate} {...options}>
+                <App />
+            </AlertProvider>
         </BrowserRouter>
     </Provider>
     , document.getElementById('root'));

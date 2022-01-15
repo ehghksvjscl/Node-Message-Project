@@ -8,13 +8,14 @@ import { Form, Icon, Input } from 'antd';
 import { useDispatch } from "react-redux";
 import GoldButton from "../../common/Buttons/GoldButton";
 import Home from "../../common/Home/Home";
-import { ToastContainer, toast } from 'react-toastify';
+import { useAlert } from 'react-alert'
 
 function LoginPage(props) {
   const dispatch = useDispatch();
 
   const [formErrorMessage, setFormErrorMessage] = useState('')
 
+  const alert = useAlert()
   return (
     <Formik
       initialValues={{
@@ -38,31 +39,10 @@ function LoginPage(props) {
             .then(response => {
               if (response.payload.loginSuccess) {
                 window.localStorage.setItem('userId', response.payload.userId);
+                alert.success("로그인 되었습니다.")
                 props.history.push("/");
               } else {
-                alert("아이디 비밀번호를 확인 하세요")
-                toast("Default Notification !");
-
-                toast.success("Success Notification !", {
-                  position: toast.POSITION.TOP_CENTER
-                });
-          
-                toast.error("Error Notification !", {
-                  position: toast.POSITION.TOP_LEFT
-                });
-          
-                toast.warn("Warning Notification !", {
-                  position: toast.POSITION.BOTTOM_LEFT
-                });
-          
-                toast.info("Info Notification !", {
-                  position: toast.POSITION.BOTTOM_CENTER
-                });
-          
-                toast("Custom Style Notification with css class!", {
-                  position: toast.POSITION.BOTTOM_RIGHT,
-                  className: 'foo-bar'
-                });
+                alert.error("로그인 정보를 확인 하세요")
               }
             })
             .catch(err => {

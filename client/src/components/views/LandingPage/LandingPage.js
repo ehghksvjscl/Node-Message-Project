@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Tiger from '../../common/Background/Tiger';
 import Number from '../../common/Background/Number';
 import styled from 'styled-components';
@@ -7,6 +7,7 @@ import GoldButton from '../../common/Buttons/GoldButton';
 import { useSelector } from "react-redux";
 import NavBar from '../NavBar/NavBar';
 import { CLIENT_URL } from '../../Config';
+import Axios from 'axios';
 
 const StyledTitle = styled.div`
     font-size: 24px;
@@ -22,8 +23,25 @@ const ButtonDiv = styled.div`
 function LandingPage(props) {
 
     const user = useSelector(state => state.user)
+    const [Messages, setMessages] = useState([])
     const handleStartClick = () => {
         props.history.push('/login')
+    }
+    
+    useEffect(() => {
+        // 로그인 상태
+        if (user.userData && user.userData.isAuth) {
+            getMyMessages(user.userData._id)
+        }
+    }, [user.userData])
+
+
+    const getMyMessages = (id) => {
+        Axios.get(`http://localhost:5000/api/messages/list/${id}`)
+        .then(response=> {
+            console.log(response.data);
+            setMessages(response.data.messages)
+        })
     }
 
     const copyToClipboard = (val) => {
@@ -59,6 +77,7 @@ function LandingPage(props) {
                     <NavBar />
                     <Number />
                     <StyledTitle>새해 복 많이 주세요.</StyledTitle>
+                    {/* 본인 메시지 리스트 */}
                     <Tiger />
                     <ButtonDiv>
                         <GoldButton name="내 링크 복사" onClick={() => copyToClipboard(`${CLIENT_URL}/link/${user.userData._id}`)}/>
