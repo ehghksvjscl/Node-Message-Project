@@ -18,23 +18,24 @@ function LoginPage(props) {
   return (
     <Formik
       initialValues={{
-        user_id: '',
+        ID: '',
         password: '',
       }}
       validationSchema={Yup.object().shape({
-        user_id: Yup.string()
+        ID: Yup.string()
           .required('아이디를 입력 하세요.'),
         password: Yup.string()
           .min(8, '최소 8글자 이상입니다.')
           .required('페스워드를 입력하세요'),
       })}
       onSubmit={(values, { setSubmitting }) => {
+        console.log("sad");
         setTimeout(() => {
           let dataToSubmit = {
-            user_id: values.user_id,
+            ID: values.ID,
             password: values.password
           };
-          console.log(dataToSubmit);
+
           dispatch(loginUser(dataToSubmit))
             .then(response => {
               if (response.payload.loginSuccess) {
@@ -42,6 +43,7 @@ function LoginPage(props) {
                 props.history.push("/");
               } else {
                 alert("아이디 비밀번호를 확인 하세요")
+                values = ""
               }
             })
             .catch(err => {

@@ -32,11 +32,11 @@ router.post("/register", (req, res) => {
 });
 
 router.post("/login", (req, res) => {
-    User.findOne({ user_id: req.body.ID }, (err, user) => {
+    User.findOne({ user_id: req.body.user_id }, (err, user) => {
         if (!user)
             return res.json({
                 loginSuccess: false,
-                message: "Auth failed, ID not found"
+                message: "Auth failed, user_id not found"
             });
 
         user.comparePassword(req.body.password, (err, isMatch) => {
