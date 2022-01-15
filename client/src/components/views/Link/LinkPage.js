@@ -29,6 +29,7 @@ function LinkPage({match}) {
     Axios.get(`http://localhost:5000/api/messages/getname/${match.params.id}`)
         .then(response=> {
             setName(response.data.user)
+            window.localStorage.setItem("userName", response.data.user)
         })
     }, [match.params.id])
 
@@ -39,10 +40,9 @@ function LinkPage({match}) {
 
     const handleNextButton = (e) =>{
         e.preventDefault()
-        // console.log("match", match.params.id);
         history.push({
             pathname: "/messageselect",
-            state: name
+            name: name
         })
     }
 

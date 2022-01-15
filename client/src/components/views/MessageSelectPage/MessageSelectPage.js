@@ -2,12 +2,13 @@ import React, {useState, useEffect} from 'react';
 import PinkButton from '../../common/Buttons/PinkButton';
 import styled from 'styled-components';
 import {useHistory,useLocation} from 'react-router-dom'
-// import PuppyIcon from '../../common/messageIcon/PuppyIcon';
-// import CatIcon from '../../common/messageIcon/CatIcon';
-// import HamsterIcon from '../../common/messageIcon/HamsterIcon';
-// import KoalaIcon from '../../common/messageIcon/KoalaIcon';
-// import MouseIcon from '../../common/messageIcon/MouseIcon';
-// import PandaIcon from '../../common/messageIcon/PandaIcon';
+import ani01 from '../../../assets/icons/ani01.png'
+import ani02 from '../../../assets/icons/ani02.png'
+import ani03 from '../../../assets/icons/ani03.png'
+import ani04 from '../../../assets/icons/ani04.png'
+import ani05 from '../../../assets/icons/ani05.png'
+import ani06 from '../../../assets/icons/ani06.png'
+
 
 const StyledTitle = styled.div`
     font-size: 18px;
@@ -30,31 +31,55 @@ const StyledIconContainer = styled.div`
     justify-content: space-between;
 `
 
+const StyledButton = styled.button`
+    background-color: transparent;
+    border-color: transparent;
+`
+
 function MessageSelectPage() {
-    
-    const location = useLocation();
-    console.log("location", location.state);
+    const history = useHistory();
 
     useEffect(()=>{
-        setName(location.state)
-    }, [location.state])
+        setName(window.localStorage.getItem("userName"))
+    }, [])
 
     const [name, setName] = useState("")
+    const [iconId, setIconId] = useState(0)
+    const animals = [
+        {num: 1, path : ani01},
+        {num: 2, path : ani02},
+        {num: 3, path : ani03},
+        {num: 4, path : ani04},
+        {num: 5, path : ani05},
+        {num: 6, path : ani06},
+        ]
+    
+    const handleClickedIcon=(id)=>{
+        setIconId(id)
+        console.log("iconID", id) 
+    }
+    
+    const handleNextButton=()=>{
+        history.push({
+            pathname: "/messageinput",
+            state: {id:iconId}
+        })
+    }
     
     return (
         <div className="app">
         <StyledTitle>
             <StyledRedSpan>{name}</StyledRedSpan>님에게 어울리는 캐릭터를 골라주세요.
         </StyledTitle> 
-        <StyledIconContainer>
-            
+        <StyledIconContainer>    
+                {animals.map(icon=><StyledButton key={icon.num} onClick={()=>handleClickedIcon(icon.num)}><img src={`${icon.path}`} /> </StyledButton>)}            
         </StyledIconContainer>
-        <PinkButton name="다음으로"/>
+        <footer onClick={handleNextButton} style={{width: "100%"}}>
+            <PinkButton name="다음으로"/>
+        </footer>
         </div>
     )
 }
 
 export default MessageSelectPage
 
-
-// 버튼 이미지 0,1,2,3 이런 식으로 해서 map으로 돌리는 게 나앗나 아니면 캐릭터 별로 버튼 만드는게 나은 걸까..? 
