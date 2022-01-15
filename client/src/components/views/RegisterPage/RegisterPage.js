@@ -10,9 +10,12 @@ import {
   Input,
 } from 'antd';
 import Home from "../../common/Home/Home";
+import { useAlert } from 'react-alert'
 
 function RegisterPage(props) {
   const dispatch = useDispatch();
+  const alert = useAlert()
+
   return (
 
     <Formik
@@ -45,10 +48,10 @@ function RegisterPage(props) {
 
           dispatch(registerUser(dataToSubmit)).then(response => {
             if (response.payload.success) {
-              alert("회원가입 하셨습니다.")
+              alert.success("회원가입 되었습니다.")
               props.history.push("/login");
             } else {
-              alert(response.payload.err.errmsg)
+              alert.error("중복된 아이디 입니다.")
             }
           })
 
