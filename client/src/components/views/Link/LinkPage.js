@@ -31,6 +31,7 @@ function LinkPage({match}) {
         .then(response=> {
             console.log(response.data)
             setName(response.data.user)
+            window.localStorage.setItem("userName", response.data.user)
         })
     }, [match.params.id])
 
@@ -44,7 +45,7 @@ function LinkPage({match}) {
         // console.log("match", match.params.id);
         history.push({
             pathname: "/messageselect",
-            state: name
+            name: name
         })
     }
 

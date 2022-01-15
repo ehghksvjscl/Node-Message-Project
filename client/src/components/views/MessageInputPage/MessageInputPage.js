@@ -1,7 +1,10 @@
 import React from 'react'
 import styled from 'styled-components';
 import PinkButton from '../../common/Buttons/PinkButton';
-import MessageInput from '..//../../assets/messageInput.png'
+import MessageInput from '..//../../assets/messageInput.png';
+import {useHistory,useLocation} from 'react-router-dom'
+
+
 
 const StyledMessageInput = styled.div`
     width: 100%;
@@ -39,6 +42,8 @@ const StyledTextArea = styled.textarea`
 `
 
 function MessageInputPage() {
+    const location = useLocation();
+
     return (
         <div className='app'>
             <StyledMessageInput>
