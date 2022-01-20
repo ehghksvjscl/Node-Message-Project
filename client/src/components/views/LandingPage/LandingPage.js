@@ -39,7 +39,6 @@ function LandingPage(props) {
     const getMyMessages = (id) => {
         Axios.get(`http://localhost:5000/api/messages/list/${id}`)
         .then(response=> {
-            console.log(response.data);
             setMessages(response.data.messages)
         })
     }

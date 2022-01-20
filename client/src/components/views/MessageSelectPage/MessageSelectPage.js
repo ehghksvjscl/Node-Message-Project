@@ -8,6 +8,7 @@ import ani03 from '../../../assets/icons/ani03.png'
 import ani04 from '../../../assets/icons/ani04.png'
 import ani05 from '../../../assets/icons/ani05.png'
 import ani06 from '../../../assets/icons/ani06.png'
+import { useAlert } from 'react-alert'
 
 
 const StyledTitle = styled.div`
@@ -19,7 +20,7 @@ const StyledTitle = styled.div`
     text-align: center;
 `
 const StyledRedSpan = styled.span`
-    color: red
+    color: red;
 `
 
 const StyledIconContainer = styled.div`
@@ -38,6 +39,8 @@ const StyledButton = styled.button`
 
 function MessageSelectPage() {
     const history = useHistory();
+    const alert = useAlert()
+    const location = useLocation();
 
     useEffect(()=>{
         setName(window.localStorage.getItem("userName"))
@@ -53,17 +56,25 @@ function MessageSelectPage() {
         {num: 5, path : ani05},
         {num: 6, path : ani06},
         ]
+
+    const check_and_push = (id) => {
+        if(id) {
+            history.push({
+                pathname: "/messageinput",
+                state: {Iconid:id, userId:location.state.userId}
+            })
+        } else {
+            alert.error("캐릭터를 골라 주세요")
+        }
+    } 
     
     const handleClickedIcon=(id)=>{
         setIconId(id)
-        console.log("iconID", id) 
+        check_and_push(id)
     }
     
     const handleNextButton=()=>{
-        history.push({
-            pathname: "/messageinput",
-            state: {id:iconId}
-        })
+        check_and_push(iconId)
     }
     
     return (
@@ -72,7 +83,7 @@ function MessageSelectPage() {
             <StyledRedSpan>{name}</StyledRedSpan>님에게 어울리는 캐릭터를 골라주세요.
         </StyledTitle> 
         <StyledIconContainer>    
-                {animals.map(icon=><StyledButton key={icon.num} onClick={()=>handleClickedIcon(icon.num)}><img src={`${icon.path}`} /> </StyledButton>)}            
+                {animals.map(icon=><StyledButton key={icon.num} onClick={()=>handleClickedIcon(icon.num)}><img src={`${icon.path}`}/> </StyledButton>)}            
         </StyledIconContainer>
         <footer onClick={handleNextButton} style={{width: "100%"}}>
             <PinkButton name="다음으로"/>

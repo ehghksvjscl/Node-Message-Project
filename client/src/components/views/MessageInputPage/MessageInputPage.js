@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import styled from 'styled-components';
 import PinkButton from '../../common/Buttons/PinkButton';
 import MessageInput from '..//../../assets/messageInput.png';
@@ -9,6 +9,8 @@ import ani03 from '../../../assets/icons/ani03.png'
 import ani04 from '../../../assets/icons/ani04.png'
 import ani05 from '../../../assets/icons/ani05.png'
 import ani06 from '../../../assets/icons/ani06.png'
+import Axios from 'axios';
+import { useAlert } from 'react-alert'
 
 
 
@@ -59,6 +61,7 @@ const StyledSenderInput = styled.input`
 `
 
 function MessageInputPage() {
+    const alert = useAlert()
     const location = useLocation();
     const history = useHistory()
     const [ recepient, setRecepient ] = useState("")
@@ -72,10 +75,13 @@ function MessageInputPage() {
         {num: 5, path : ani05},
         {num: 6, path : ani06},
         ]
+    const textAreaRef = useRef()
+    const FromInput = useRef()
+
     useEffect(()=>{
         setRecepient(window.localStorage.getItem("userName"))
-        console.log(location.state.id);
-        const pickedIcon = animals.find(icon => icon.num === location.state.id)
+        console.log(location.state.Iconid);
+        const pickedIcon = animals.find(icon => icon.num === location.state.Iconid)
         setIcon(pickedIcon.path)
     }, [])
 
@@ -84,10 +90,27 @@ function MessageInputPage() {
     }
 
     const handleNextButton=()=>{
-        // console.log("sender", sender)
-        history.push({
-            pathname: "/completed",
+        const {userId, Iconid} = location.state
+
+        let body = {
+            user_id: userId,
+            badge: Iconid,
+            content: textAreaRef.current.value,
+            fromUserName: FromInput.current.value
+        }
+
+        Axios.post("http://localhost:5000/api/messages/addMessage", body)
+        .then(response => {
+            if(response.data.success) {
+                history.push({
+                    pathname: "/completed",
+                })
+            } else {
+                // 각각 예외처리 필요
+                alert.error("메세지 전송에 실패 했습니다.")
+            }
         })
+
     }
 
     return (
@@ -95,8 +118,8 @@ function MessageInputPage() {
             <StyledMessageInput>
                 <StyledTo>To.{recepient}</StyledTo>
                 <StyledIcon src={icon} />
-                <StyledTextArea placeholder='메세지를 입력해주세요...'/>
-                <StyledFrom>From.<StyledSenderInput name="senderName" onChange={handleOnchangeSender} value={sender} placeholder="이름을 입력해주세요"/></StyledFrom>
+                <StyledTextArea maxLength="300" ref={textAreaRef} placeholder='메세지를 입력해주세요...'/>
+                <StyledFrom>From.<StyledSenderInput ref={FromInput} name="senderName" onChange={handleOnchangeSender} value={sender} placeholder="이름을 입력해주세요"/></StyledFrom>
             </StyledMessageInput>
             <footer onClick={handleNextButton} style={{width: "100%"}}>
             <PinkButton name="다음으로"/>

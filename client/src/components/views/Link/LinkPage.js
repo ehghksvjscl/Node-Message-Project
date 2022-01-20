@@ -5,6 +5,7 @@ import PinkButton from '../../common/Buttons/PinkButton';
 import styled from 'styled-components';
 import Axios from 'axios';
 import {useHistory} from "react-router";
+import { useAlert } from 'react-alert'
 
 const StyledTitle = styled.div`
     font-size: 18px;
@@ -15,14 +16,20 @@ const StyledTitle = styled.div`
     text-align: center;
 `
 const StyledRedSpan = styled.span`
-    color: red
+    color: red;
 `
 
 function LinkPage({match}) {
+    const history = useHistory();
+    const alert = useAlert()
+
     useEffect(() => {
         Axios.get(`http://localhost:5000/api/messages/list/${match.params.id}`)
         .then(response=> {
             setMsgNum(response.data.messages.length)
+        }).catch(() => {
+            alert.error("잘못된 접근입니다.")
+            history.push('/')
         })
 
 
@@ -31,18 +38,21 @@ function LinkPage({match}) {
             setName(response.data.user)
             window.localStorage.setItem("userName", response.data.user)
         })
+        .catch(() => {
+            history.push('/')
+        })
     }, [match.params.id])
 
     const [name, setName] = useState("")
     const [msgNum, setMsgNum] = useState(0)
 
-    const history = useHistory();
 
     const handleNextButton = (e) =>{
         e.preventDefault()
         history.push({
             pathname: "/messageselect",
-            name: name
+            name: name,
+            state: {userId:match.params.id}
         })
     }
 
