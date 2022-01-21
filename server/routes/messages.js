@@ -8,6 +8,9 @@ const { Message } = require("../models/Message");
 //             Messages
 //=================================
 router.get("/getname/:user_id", (req, res) => {
+    User.find((err, user) => {
+        console.log(user);
+    })
     User.findOne({"_id":req.params.user_id})
     .exec((err, user) => {
         if(err) return res.status(400).send(err)
