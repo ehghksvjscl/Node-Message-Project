@@ -14,6 +14,8 @@ import ani03 from '../../../assets/icons/ani03.png'
 import ani04 from '../../../assets/icons/ani04.png'
 import ani05 from '../../../assets/icons/ani05.png'
 import ani06 from '../../../assets/icons/ani06.png'
+import arrow from '../../../assets/icons/arrowRight.png'
+
 
 const StyledTitle = styled.div`
     font-size: 24px;
@@ -25,6 +27,56 @@ const StyledTitle = styled.div`
 const ButtonDiv = styled.div`
     margin-top: 30rem;
 `
+const StyledIconListContainer = styled.div`
+    display: flex;
+    flex-wrap: no-wrap;
+    width: 350px;
+    height: 250px;
+    position: relative;
+    top: 30%;
+    margin: 0 auto;
+    overflow: hidden;
+`
+const StyledIconListUl = styled.ul`
+    display: flex;
+    flex-wrap: wrap;
+    width: 350px;
+    height: 250px;
+    padding-left: 0;
+    flex-direction: column;
+    position: absolute;
+    top: 0%;
+    left: 0;
+    z-index: 9;
+`
+const StyledIconList = styled.li`
+    list-style: none;
+    width: 30%;
+    margin: 0 1%;
+`
+
+const StyledButtonRight = styled.button`
+    width: 10px;
+    position: absolute;
+    top: 30%;
+    right: 20%;
+    background-color: transparent;
+    border: none;
+`
+
+const StyledButtonLeft= styled.button`
+width: 10px;
+position: absolute;
+top: 30%;
+left: 20%;
+background-color: transparent;
+border: none;
+transform: rotate(-180deg);
+`
+
+
+
+
 
 function LandingPage(props) {
 
@@ -39,6 +91,8 @@ function LandingPage(props) {
     const user = useSelector(state => state.user)
     const [Messages, setMessages] = useState([])
     const [badges, setBadges] = useState([])
+    const [clickCount, setClickCount] = useState(0)
+    const [arrowMove, setArrowMove] = useState(0)
 
     const handleStartClick = () => {
         props.history.push('/login')
@@ -85,6 +139,16 @@ function LandingPage(props) {
         console.log(badges);
       }
 
+    //   state 값 한번 유지 되는 버그 수정 필요
+      const handleRightArrow=()=>{
+                setClickCount(clickCount=> clickCount-1)
+                return setArrowMove(clickCount * 350)
+      }
+      const handleLeftArrow=()=>{
+        setClickCount(clickCount=> clickCount+1)
+       return setArrowMove(clickCount * 350)
+    }
+
     // 로그인 안했을 경우
     if (user.userData && !user.userData.isAuth) {
         return (
@@ -94,11 +158,11 @@ function LandingPage(props) {
                     <Number />
                     <StyledTitle>새해 복 많이 주세요.</StyledTitle>
                     <Tiger />
-                    <div>
-                        <ul>
-                            {badges.map(iconNum => <li><img src={iconNum}/></li>)}
-                        </ul>
-                    </div>
+                    <StyledIconListContainer>
+                        <StyledIconListUl>
+                            {badges.map(iconNum => <StyledIconList><img src={iconNum}/></StyledIconList>)}
+                        </StyledIconListUl>
+                    </StyledIconListContainer>                   
                     <ButtonDiv>
                         <GoldButton name="시작하기" onClick={handleStartClick}/>
                     </ButtonDiv>
@@ -115,12 +179,17 @@ function LandingPage(props) {
                     <StyledTitle>새해 복 많이 주세요.</StyledTitle>
                     {/* 본인 메시지 리스트 */}
                     <Tiger />
-                    {badges && <p>123</p>}
-                    <div>
-                        <ul>
-                            {badges.map(iconNum => <li><img src={iconNum}/></li>)}
-                        </ul>
-                    </div>
+                    <StyledButtonLeft onClick={handleLeftArrow}>
+                        <img src={arrow} />
+                    </StyledButtonLeft>
+                    <StyledIconListContainer>
+                        <StyledIconListUl style={{left: `${arrowMove}px`}}>
+                            {badges.map((iconNum, index) => <StyledIconList key={index}><img src={iconNum}/></StyledIconList>)}
+                        </StyledIconListUl>
+                    </StyledIconListContainer>
+                    <StyledButtonRight onClick={handleRightArrow}>
+                        <img src={arrow} />
+                    </StyledButtonRight>
                     <ButtonDiv>
                         <GoldButton name="내 링크 복사" onClick={() => copyToClipboard(`${CLIENT_URL}/link/${user.userData._id}`)}/>
                     </ButtonDiv>

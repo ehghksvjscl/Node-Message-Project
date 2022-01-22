@@ -29,6 +29,7 @@ body {
   align-items: center;
   height: 100vh;
   font-family: "Gaegu", "Noto Sans KR";
+  list-style: none;
 }
 
 input.error {
