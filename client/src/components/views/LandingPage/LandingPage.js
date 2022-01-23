@@ -15,6 +15,8 @@ import ani04 from '../../../assets/icons/ani04.png'
 import ani05 from '../../../assets/icons/ani05.png'
 import ani06 from '../../../assets/icons/ani06.png'
 import arrow from '../../../assets/icons/arrowRight.png'
+import {useHistory,useLocation} from 'react-router-dom'
+
 
 
 const StyledTitle = styled.div`
@@ -33,7 +35,7 @@ const StyledIconListContainer = styled.div`
     width: 350px;
     height: 250px;
     position: relative;
-    top: 30%;
+    top: 20%;
     margin: 0 auto;
     overflow: hidden;
 `
@@ -53,13 +55,21 @@ const StyledIconList = styled.li`
     list-style: none;
     width: 30%;
     margin: 0 1%;
+    position: relative;
 `
+const StyledFromUserList = styled.li`
+    width: 30%;
+    height: 125px;
+    position: relative;
+    top: 50px;
+`
+
 
 const StyledButtonRight = styled.button`
     width: 10px;
     position: absolute;
     top: 30%;
-    right: 20%;
+    right: 6%;
     background-color: transparent;
     border: none;
 `
@@ -68,7 +78,7 @@ const StyledButtonLeft= styled.button`
 width: 10px;
 position: absolute;
 top: 30%;
-left: 20%;
+left: 6%;
 background-color: transparent;
 border: none;
 transform: rotate(-180deg);
@@ -79,6 +89,8 @@ transform: rotate(-180deg);
 
 
 function LandingPage(props) {
+    const location = useLocation();
+    const history = useHistory()
 
     const animals = [
         {id: 1, path : ani01},
@@ -91,6 +103,7 @@ function LandingPage(props) {
     const user = useSelector(state => state.user)
     const [Messages, setMessages] = useState([])
     const [badges, setBadges] = useState([])
+    const [fromUser, setFromUser] = useState([])
     const [clickCount, setClickCount] = useState(0)
     const [arrowMove, setArrowMove] = useState(0)
 
@@ -111,11 +124,15 @@ function LandingPage(props) {
         .then(response=> {
             const badgeArray = []
             const pathArray = []
+            const fromUserList = []
 
             setMessages(response.data.messages)
+            console.log("datas", response.data.messages);
             response.data.messages.map(meg => {
                 badgeArray.push(meg.badge)
+                fromUserList.push(meg.fromUserName)
             })
+            setFromUser(fromUserList)
             const findId = badgeArray.find((num, index) => {
                 // num === animals[index].id
                 animals.forEach(item => {
@@ -147,6 +164,18 @@ function LandingPage(props) {
       const handleLeftArrow=()=>{
         setClickCount(clickCount=> clickCount+1)
        return setArrowMove(clickCount * 350)
+    }
+
+    const handleClickedIcon=(index)=>{
+        console.log("clicked", index);
+        let thisMsg = Messages[index]
+        console.log("meg", thisMsg);
+        history.push({
+            pathname : '/getmessage',
+            state : {
+                thisMsg : thisMsg
+            }
+        })
     }
 
     // 로그인 안했을 경우
@@ -184,7 +213,7 @@ function LandingPage(props) {
                     </StyledButtonLeft>
                     <StyledIconListContainer>
                         <StyledIconListUl style={{left: `${arrowMove}px`}}>
-                            {badges.map((iconNum, index) => <StyledIconList key={index}><img src={iconNum}/></StyledIconList>)}
+                            {badges.map((iconNum, index) => <StyledIconList onClick={()=>handleClickedIcon(index)} key={index}><img src={iconNum}/></StyledIconList>)}
                         </StyledIconListUl>
                     </StyledIconListContainer>
                     <StyledButtonRight onClick={handleRightArrow}>

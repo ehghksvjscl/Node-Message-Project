@@ -14,6 +14,7 @@ import styled from 'styled-components';
 import MessageSelectPage from './views/MessageSelectPage/MessageSelectPage';
 import MessageInputPage from './views/MessageInputPage/MessageInputPage';
 import CompletedPage from './views/CompletedPage/CompletedPage'
+import GetMessage from './views/GetMessage/GetMessage'
 
 const StyledBackGround = styled.div`
     width: 100vw;
@@ -40,6 +41,7 @@ function App() {
             <Route path="/messageselect" component={MessageSelectPage} />
             <Route path="/messageinput" component={MessageInputPage} />
             <Route exact path="/completed" component={CompletedPage} />
+            <Route exact path="/getmessage" component={Auth(GetMessage, false)} />
            </Switch>
         </div>
       </Suspense>
