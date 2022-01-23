@@ -15,8 +15,8 @@ import ani04 from '../../../assets/icons/ani04.png'
 import ani05 from '../../../assets/icons/ani05.png'
 import ani06 from '../../../assets/icons/ani06.png'
 import arrow from '../../../assets/icons/arrowRight.png'
-import {useHistory,useLocation} from 'react-router-dom'
-
+import {useHistory} from 'react-router-dom'
+import * as usestate from 'react-usestateref'
 
 
 const StyledTitle = styled.div`
@@ -38,6 +38,7 @@ const StyledIconListContainer = styled.div`
     top: 20%;
     margin: 0 auto;
     overflow: hidden;
+    z-index: 100;
 `
 const StyledIconListUl = styled.ul`
     display: flex;
@@ -72,6 +73,8 @@ const StyledButtonRight = styled.button`
     right: 6%;
     background-color: transparent;
     border: none;
+    z-index: 999;
+
 `
 
 const StyledButtonLeft= styled.button`
@@ -82,14 +85,10 @@ left: 6%;
 background-color: transparent;
 border: none;
 transform: rotate(-180deg);
+z-index: 999;
 `
 
-
-
-
-
 function LandingPage(props) {
-    const location = useLocation();
     const history = useHistory()
 
     const animals = [
@@ -104,7 +103,7 @@ function LandingPage(props) {
     const [Messages, setMessages] = useState([])
     const [badges, setBadges] = useState([])
     const [fromUser, setFromUser] = useState([])
-    const [clickCount, setClickCount] = useState(0)
+    const [clickCount,setClickCount,clickCountRef] = usestate(0)
     const [arrowMove, setArrowMove] = useState(0)
 
     const handleStartClick = () => {
@@ -127,7 +126,6 @@ function LandingPage(props) {
             const fromUserList = []
 
             setMessages(response.data.messages)
-            console.log("datas", response.data.messages);
             response.data.messages.map(meg => {
                 badgeArray.push(meg.badge)
                 fromUserList.push(meg.fromUserName)
@@ -153,23 +151,28 @@ function LandingPage(props) {
         document.execCommand('copy');
         document.body.removeChild(t);
         alert("내 주소가 복사 되었습니다.")
-        console.log(badges);
       }
 
     //   state 값 한번 유지 되는 버그 수정 필요
-      const handleRightArrow=()=>{
-                setClickCount(clickCount=> clickCount-1)
-                return setArrowMove(clickCount * 350)
+    //   수정 완료
+      const handleRightArrow= async ()=>{
+        const page = Messages.length / 6
+        if (clickCountRef.current > parseInt(page * -1)) {
+            setClickCount(clickCount - 1)
+            setArrowMove(clickCountRef.current * 350)
+        } 
       }
-      const handleLeftArrow=()=>{
-        setClickCount(clickCount=> clickCount+1)
-       return setArrowMove(clickCount * 350)
+
+      const handleLeftArrow= async ()=>{
+        const page = Messages.length / 6
+        if (clickCountRef.current < parseInt(page * -1)) {
+            setClickCount(clickCount + 1)
+            setArrowMove(clickCountRef.current * 350)
+        } 
     }
 
     const handleClickedIcon=(index)=>{
-        console.log("clicked", index);
         let thisMsg = Messages[index]
-        console.log("meg", thisMsg);
         history.push({
             pathname : '/getmessage',
             state : {

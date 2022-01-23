@@ -41,7 +41,7 @@ function App() {
             <Route path="/messageselect" component={MessageSelectPage} />
             <Route path="/messageinput" component={MessageInputPage} />
             <Route exact path="/completed" component={CompletedPage} />
-            <Route exact path="/getmessage" component={Auth(GetMessage, false)} />
+            <Route exact path="/getmessage" component={Auth(GetMessage)} />
            </Switch>
         </div>
       </Suspense>
