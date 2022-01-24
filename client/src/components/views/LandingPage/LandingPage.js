@@ -27,7 +27,7 @@ const StyledTitle = styled.div`
     margin: 0 auto;
 `
 const ButtonDiv = styled.div`
-    margin-top: 30rem;
+    margin-top: 18rem;
 `
 const StyledIconListContainer = styled.div`
     display: flex;
@@ -36,7 +36,7 @@ const StyledIconListContainer = styled.div`
     height: 250px;
     position: relative;
     top: 20%;
-    margin: 0 auto;
+    margin-left: 30px;
     overflow: hidden;
     z-index: 100;
 `
@@ -49,13 +49,11 @@ const StyledIconListUl = styled.ul`
     flex-direction: column;
     position: absolute;
     top: 0%;
-    left: 0;
     z-index: 9;
 `
 const StyledIconList = styled.li`
     list-style: none;
-    width: 30%;
-    margin: 0 1%;
+    width: 33.3%;
     position: relative;
 `
 const StyledFromUserList = styled.li`
