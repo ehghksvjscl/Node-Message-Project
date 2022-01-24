@@ -117,7 +117,7 @@ function LandingPage(props) {
 
 
     const getMyMessages = (id) => {
-        Axios.get(`http://localhost:5000/api/messages/list/${id}`)
+        Axios.get(`http://52.141.57.37:5000/api/messages/list/${id}`)
         .then(response=> {
             const badgeArray = []
             const pathArray = []

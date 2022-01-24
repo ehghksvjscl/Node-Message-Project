@@ -99,7 +99,7 @@ function MessageInputPage() {
             fromUserName: FromInput.current.value
         }
 
-        Axios.post("http://localhost:5000/api/messages/addMessage", body)
+        Axios.post("http://52.141.57.37:5000/api/messages/addMessage", body)
         .then(response => {
             if(response.data.success) {
                 history.push({

@@ -26,7 +26,7 @@ function LinkPage({match}) {
     const alert = useAlert()
 
     useEffect(() => {
-        Axios.get(`http://localhost:5000/api/messages/list/${match.params.id}`)
+        Axios.get(`http://52.141.57.37:5000/api/messages/list/${match.params.id}`)
         .then(response=> {
             setMsgNum(response.data.messages.length)
         }).catch(() => {
@@ -35,7 +35,7 @@ function LinkPage({match}) {
         })
 
 
-    Axios.get(`http://localhost:5000/api/messages/getname/${match.params.id}`)
+    Axios.get(`http://52.141.57.37:5000/api/messages/getname/${match.params.id}`)
         .then(response=> {
             setName(response.data.user)
             window.localStorage.setItem("userName", response.data.user)
