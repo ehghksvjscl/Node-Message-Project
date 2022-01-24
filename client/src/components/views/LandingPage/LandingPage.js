@@ -156,17 +156,16 @@ function LandingPage(props) {
     //   state 값 한번 유지 되는 버그 수정 필요
     //   수정 완료
       const handleRightArrow= async ()=>{
-          console.log("clicked");
-        const page = Messages.length / 6
-        if (clickCountRef.current >= parseInt(page * -1)) {
+        const page = Messages.length % 5
+        if (clickCountRef.current > parseInt(page * -1)) {
             setClickCount(clickCount - 1)
             setArrowMove(clickCountRef.current * 350)
         } 
       }
 
       const handleLeftArrow= async ()=>{
-        const page = Messages.length / 6
-        if (clickCountRef.current < parseInt(page * -1)) {
+        const page = Messages.length % 5
+        if (clickCountRef.current <= parseInt(page * -1)) {
             setClickCount(clickCount + 1)
             setArrowMove(clickCountRef.current * 350)
         } 
