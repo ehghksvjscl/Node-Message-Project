@@ -156,8 +156,9 @@ function LandingPage(props) {
     //   state 값 한번 유지 되는 버그 수정 필요
     //   수정 완료
       const handleRightArrow= async ()=>{
+          console.log("clicked");
         const page = Messages.length / 6
-        if (clickCountRef.current > parseInt(page * -1)) {
+        if (clickCountRef.current >= parseInt(page * -1)) {
             setClickCount(clickCount - 1)
             setArrowMove(clickCountRef.current * 350)
         } 
@@ -192,7 +193,7 @@ function LandingPage(props) {
                     <Tiger />
                     <StyledIconListContainer>
                         <StyledIconListUl>
-                            {badges.map(iconNum => <StyledIconList><img src={iconNum}/></StyledIconList>)}
+                        {badges.map((iconNum, index) => <StyledIconList key={index}><img src={iconNum}/></StyledIconList>)}
                         </StyledIconListUl>
                     </StyledIconListContainer>                   
                     <ButtonDiv>
