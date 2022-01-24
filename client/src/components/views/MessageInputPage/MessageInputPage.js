@@ -39,7 +39,7 @@ const StyledFrom = styled.p`
 `
 
 const StyledTextArea = styled.textarea`
-    width: 80%;
+    width: 70%;
     height: 185px;
     position: absolute;
     top: 25%;

@@ -6,6 +6,8 @@ import styled from 'styled-components';
 import Axios from 'axios';
 import {useHistory} from "react-router";
 import { useAlert } from 'react-alert'
+import NavBar from '../NavBar/NavBar';
+
 
 const StyledTitle = styled.div`
     font-size: 18px;
@@ -59,6 +61,7 @@ function LinkPage({match}) {
 
     return (
         <div className="app">
+            <NavBar />
             <Number />
                 <StyledTitle>
                    <p><StyledRedSpan>{name}</StyledRedSpan>님의 복주머니에 <StyledRedSpan>{msgNum}</StyledRedSpan>개의 복주머니가 있습니다.</p>
