@@ -19,8 +19,7 @@ const StyledMessageInput = styled.div`
     background-image: url(${MessageInput});
     background-size: cover;
     background-repeat: no-repeat;
-    position: relative;
-    
+    position: relative;    
 `
 const StyledTo = styled.p`
     font-size: 24px;
@@ -37,7 +36,7 @@ const StyledFrom = styled.p`
     left: 13%;
 `
 
-const StyledTextArea = styled.textarea`
+const StyledTextArea = styled.p`
     width: 80%;
     height: 185px;
     position: absolute;
@@ -54,10 +53,7 @@ const StyledIcon = styled.img`
     left: 35%;
 `
 
-const StyledSenderInput = styled.input`
-    width: 70%;
-    border: none;
-`
+
 
 function GetMessageInput() {
     const location = useLocation();
@@ -78,9 +74,11 @@ function GetMessageInput() {
 
     useEffect(()=>{
         const {thisMsg} = location.state
-        console.log("this", thisMsg);
+        console.log("thisMsg", thisMsg);
+        const findIcon = animals.find(animal => animal.num === thisMsg.badge)
+        setRecepient(thisMsg.user_id.name)
         setSender(thisMsg.fromUserName)
-        setIcon(thisMsg.badge)
+        setIcon(findIcon.path)
         setContent(thisMsg.content)
     }, [])
 
@@ -94,7 +92,7 @@ function GetMessageInput() {
             <StyledMessageInput>
                 <StyledTo>To.{recepient}</StyledTo>
                 <StyledIcon src={icon} />
-                    <p>{content}</p>
+                    <StyledTextArea>{content}</StyledTextArea>
                 <StyledFrom>From.{sender}</StyledFrom>
             </StyledMessageInput>
             <footer onClick={handleHomeButton} style={{width: "100%"}}>
