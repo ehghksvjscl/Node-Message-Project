@@ -4,14 +4,12 @@
 ![image](https://user-images.githubusercontent.com/22442843/166851536-4f142488-51ff-498f-9465-14299cf2888a.png)
 ![image](https://user-images.githubusercontent.com/22442843/166851566-3e03f3b3-919c-4915-a525-65d3b3cdcb5a.png)
 
-## 사용 예제
+## 사용 스택
 
-OS X & 리눅스 & 윈도우:
-
-1. make dev.js file inside config folder 
-2. put mongoDB info into dev.js file 
-3. Type  " npm install " inside the root directory  ( Download Server Dependencies ) 
-4. Type " npm install " inside the client directory ( Download Front-end Dependencies )
+### 사용 프래임 워크
+* 백앤드 : Node, 몽고DB
+* 프론트 : 리엑트
+* 디자인 : 피그마
 
 ```sh
 npm i
